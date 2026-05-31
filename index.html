@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destination Services — Your Trusted Travel Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="css/animations.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --gold-dim: #8a6e30;
+    --gold-faint: #2a2318;
+    --bg-deep: #080807;
+    --bg-main: #0c0c0b;
+    --bg-surface: #0f0e0a;
+    --bg-card: #111009;
+    --text-primary: #e8e0d0;
+    --text-secondary: #9a8e7a;
+    --text-muted: #5a5040;
+    --text-faint: #3a3020;
+    --border: #1e1a12;
+    --border-mid: #2a2318;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Cormorant Garamond', serif; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.018;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: rgba(8,8,7,0.97);
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .logo-wrap { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .logo-emblem {
+    width: 44px; height: 44px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .logo-emblem::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .logo-emblem i { font-size: 18px; color: var(--gold); }
+
+  .logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .logo-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 2.5px;
+  }
+  .logo-main .gilt { color: var(--gold); }
+  .logo-sub {
+    font-size: 8px;
+    letter-spacing: 4.5px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    transition: color 0.25s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 9px 24px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+  .nav-cta:hover { color: var(--bg-deep); }
+  .nav-cta:hover::before { transform: scaleX(1); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg-main);
+    padding: 7rem 3rem 5.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    opacity: 0.5;
+  }
+
+  /* Radial glow */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 50%, rgba(201,168,76,0.05) 0%, transparent 45%),
+      radial-gradient(circle at 85% 50%, rgba(201,168,76,0.05) 0%, transparent 45%),
+      radial-gradient(circle at 50% 100%, rgba(201,168,76,0.03) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* Decorative corner lines */
+  .hero-corners {
+    position: absolute;
+    inset: 2.5rem;
+    pointer-events: none;
+  }
+  .hero-corners::before, .hero-corners::after {
+    content: '';
+    position: absolute;
+    width: 50px; height: 50px;
+    border-color: rgba(201,168,76,0.15);
+    border-style: solid;
+  }
+  .hero-corners::before {
+    top: 0; left: 0;
+    border-width: 1px 0 0 1px;
+  }
+  .hero-corners::after {
+    bottom: 0; right: 0;
+    border-width: 0 1px 1px 0;
+  }
+
+  .ornament {
+    display: flex; align-items: center; justify-content: center;
+    gap: 14px; margin-bottom: 2rem;
+  }
+  .orn-line { width: 64px; height: 1px; background: var(--gold); opacity: 0.4; }
+  .orn-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+  .orn-sm { width: 4px; height: 4px; background: var(--gold-dim); transform: rotate(45deg); }
+
+  .hero-eyebrow {
+    font-size: 9.5px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.06;
+    margin-bottom: 0.5rem;
+    position: relative;
+    letter-spacing: 1px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+
+  .hero-rule {
+    width: 80px; height: 1px;
+    background: var(--gold); margin: 1.75rem auto; opacity: 0.5;
+  }
+
+  .hero p {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 3rem;
+    line-height: 2.2;
+    letter-spacing: 0.4px;
+  }
+
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-gold {
+    background: var(--gold);
+    color: var(--bg-deep);
+    padding: 15px 44px;
+    font-size: 9.5px;
+    letter-spacing: 3.5px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.12);
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.5s ease;
+  }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(201,168,76,0.2); }
+  .btn-gold:hover::after { transform: translateX(100%) skewX(-15deg); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 15px 44px;
+    font-size: 9.5px;
+    letter-spacing: 3.5px;
+    font-weight: 600;
+    border: 1px solid var(--border-mid);
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 3.5rem;
+    position: relative;
+    width: 100%;
+  }
+  .stat-item {
+    padding: 0 4rem;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .stat-lbl {
+    font-size: 8.5px;
+    letter-spacing: 3px;
+    color: var(--text-faint);
+    margin-top: 10px;
+    font-weight: 500;
+    display: block;
+  }
+
+  /* ── DIVIDERS ── */
+  .section-divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; padding: 3.5rem 3rem 0;
+  }
+  .div-line { flex: 1; max-width: 140px; height: 1px; background: var(--border); }
+  .div-text { font-size: 8.5px; letter-spacing: 5px; color: var(--gold); font-weight: 500; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 5rem 3rem; max-width: 1080px; margin: 0 auto; }
+  .sec-eyebrow { font-size: 8.5px; letter-spacing: 5px; color: var(--gold); font-weight: 500; margin-bottom: 1rem; }
+  .sec-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 46px; font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.12; margin-bottom: 1rem;
+  }
+  .sec-sub {
+    font-size: 12px; color: var(--text-muted);
+    line-height: 2.2; letter-spacing: 0.3px; max-width: 480px;
+  }
+
+  /* ── SERVICES ── */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px;
+    margin-top: 3.5rem;
+    border: 1px solid var(--border);
+    background: var(--border);
+  }
+  .svc-card {
+    background: var(--bg-card);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .svc-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .svc-card:hover { background: #141209; }
+  .svc-card:hover::after { transform: scaleX(1); }
+  .svc-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px; font-weight: 400;
+    color: var(--border-mid); line-height: 1; margin-bottom: 1.25rem;
+    transition: color 0.3s;
+  }
+  .svc-card:hover .svc-num { color: var(--gold-faint); }
+  .svc-icon-row { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .svc-icon-row i { font-size: 20px; color: var(--gold); transition: transform 0.3s; }
+  .svc-card:hover .svc-icon-row i { transform: scale(1.15); }
+  .svc-rule { width: 24px; height: 1px; background: var(--gold); opacity: 0.4; }
+  .svc-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 500;
+    color: var(--text-primary); margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .svc-desc { font-size: 11px; color: var(--text-muted); line-height: 2.1; letter-spacing: 0.3px; }
+
+  /* ── WHY US ── */
+  .dark-band {
+    background: var(--bg-deep);
+    padding: 5.5rem 3rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .dark-band::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.025) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .why-inner { max-width: 1080px; margin: 0 auto; position: relative; }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem; margin-top: 3.5rem;
+  }
+  .why-card {
+    text-align: center;
+    padding: 2rem 1.25rem;
+    border: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+  }
+  .why-card:hover {
+    border-color: var(--border);
+    background: rgba(201,168,76,0.02);
+  }
+  .why-icon-wrap {
+    width: 60px; height: 60px;
+    border: 1px solid var(--border-mid);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .why-icon-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+    transition: border-color 0.3s;
+  }
+  .why-card:hover .why-icon-wrap {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,168,76,0.1);
+  }
+  .why-card:hover .why-icon-wrap::before { border-color: rgba(201,168,76,0.25); }
+  .why-icon-wrap i { font-size: 20px; color: var(--gold); }
+  .why-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px; font-weight: 500;
+    color: var(--text-primary); margin-bottom: 10px;
+  }
+  .why-card p { font-size: 11px; color: var(--text-muted); line-height: 2.1; }
+
+  /* ── FLEET ── */
+  .fleet-sec { padding: 5.5rem 3rem; background: var(--bg-main); }
+  .fleet-inner { max-width: 1080px; margin: 0 auto; }
+  .fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px; margin-top: 3.5rem;
+  }
+  .fleet-card {
+    border: 1px solid var(--border);
+    padding: 2.25rem 1.75rem;
+    background: var(--bg-surface);
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+  }
+  .fleet-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .fleet-card:hover::before { opacity: 1; }
+  .fleet-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px; height: 52px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .fleet-card:hover {
+    border-color: rgba(201,168,76,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .fleet-icon { font-size: 30px; color: var(--gold); margin-bottom: 1.5rem; display: block; transition: transform 0.3s; }
+  .fleet-card:hover .fleet-icon { transform: scale(1.1); }
+  .fleet-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--text-primary); margin-bottom: 6px;
+  }
+  .fleet-cap { font-size: 9.5px; letter-spacing: 2px; color: var(--text-muted); font-weight: 500; margin-bottom: 16px; }
+  .fleet-badge {
+    display: inline-block;
+    border: 1px solid var(--border-mid);
+    color: var(--gold);
+    font-size: 8.5px; letter-spacing: 2px; padding: 5px 12px; font-weight: 500;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .fleet-card:hover .fleet-badge { background: rgba(201,168,76,0.07); border-color: rgba(201,168,76,0.4); }
+
+  /* ── CITIES ── */
+  .cities-sec {
+    padding: 5.5rem 3rem;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--border);
+  }
+  .cities-inner { max-width: 1080px; margin: 0 auto; }
+  .city-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 10px; margin-top: 3rem;
+  }
+  .city-pill {
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--bg-surface);
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    cursor: default;
+  }
+  .city-pill:hover { border-color: var(--gold); background: rgba(201,168,76,0.03); transform: translateY(-2px); }
+  .city-pill i { font-size: 13px; color: var(--gold); flex-shrink: 0; }
+  .city-pill span { font-size: 10.5px; letter-spacing: 1.5px; color: var(--text-secondary); font-weight: 500; }
+
+  /* ── TESTIMONIAL STRIP ── */
+  .strip {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4.5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .strip::before {
+    content: '\201C';
+    position: absolute;
+    top: -30px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 200px;
+    color: rgba(201,168,76,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .strip blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-style: italic;
+    color: var(--text-secondary);
+    max-width: 700px; margin: 0 auto;
+    line-height: 1.75;
+    position: relative;
+  }
+  .strip blockquote span { color: var(--gold); }
+  .strip cite {
+    display: block;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--text-muted); margin-top: 1.75rem;
+    font-style: normal; font-family: 'Montserrat', sans-serif;
+  }
+
+  /* ── CONTACT ── */
+  .contact-sec {
+    background: var(--bg-main);
+    padding: 5.5rem 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .contact-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: start;
+  }
+  .contact-info-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px; font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.15; margin-bottom: 0.75rem;
+  }
+  .contact-sub {
+    font-size: 11.5px; color: var(--text-muted);
+    line-height: 2.2; letter-spacing: 0.3px;
+    margin-bottom: 2.75rem; max-width: 340px;
+  }
+  .contact-row {
+    display: flex; align-items: flex-start;
+    gap: 16px; margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.25s;
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-row:hover { border-color: var(--border-mid); }
+  .ci-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border-mid);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.25s;
+  }
+  .contact-row:hover .ci-icon { border-color: rgba(201,168,76,0.4); }
+  .ci-icon i { font-size: 15px; color: var(--gold); }
+  .ci-label { font-size: 8.5px; letter-spacing: 2.5px; color: var(--text-muted); font-weight: 500; margin-bottom: 5px; }
+  .ci-val { font-size: 13px; color: var(--gold); letter-spacing: 0.5px; }
+
+  .form-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    padding: 2.75rem;
+    position: relative;
+  }
+  .form-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
+  }
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .fr { margin-bottom: 1.1rem; }
+  .fr label {
+    display: block;
+    font-size: 8.5px; letter-spacing: 2.5px;
+    color: var(--text-muted); font-weight: 500; margin-bottom: 7px;
+  }
+  .fr input, .fr select, .fr textarea {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    letter-spacing: 0.5px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .fr input::placeholder, .fr textarea::placeholder { color: var(--text-faint); }
+  .fr textarea { min-height: 92px; resize: vertical; }
+  .fr input:focus, .fr select:focus, .fr textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.07);
+  }
+  .fr select { color: var(--text-secondary); cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a5040'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+  .fr select option { background: var(--bg-deep); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-submit {
+    width: 100%;
+    background: var(--gold);
+    color: var(--bg-deep);
+    padding: 14px;
+    border: none;
+    font-size: 9.5px; letter-spacing: 3.5px; font-weight: 600;
+    cursor: pointer; margin-top: 6px;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-submit::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.12);
+    transform: translateX(-100%) skewX(-15deg);
+    transition: transform 0.5s ease;
+  }
+  .form-submit:hover { background: var(--gold-light); }
+  .form-submit:hover::after { transform: translateX(100%) skewX(-15deg); }
+
+  /* ── SUCCESS MESSAGE ── */
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2.5rem 1rem;
+  }
+  .form-success .tick {
+    width: 56px; height: 56px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+  }
+  .form-success .tick i { font-size: 22px; color: var(--gold); }
+  .form-success h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; color: var(--text-primary); margin-bottom: 0.5rem;
+  }
+  .form-success p { font-size: 11px; color: var(--text-muted); line-height: 1.9; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    z-index: 900;
+    display: flex; align-items: center; gap: 10px;
+    background: #0a0a08;
+    border: 1px solid #25d366;
+    padding: 11px 18px 11px 14px;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .whatsapp-float:hover {
+    background: #25d366;
+    box-shadow: 0 6px 30px rgba(37,211,102,0.25);
+    transform: translateY(-2px);
+  }
+  .whatsapp-float i { font-size: 18px; color: #25d366; transition: color 0.3s; }
+  .whatsapp-float:hover i { color: #fff; }
+  .whatsapp-float span {
+    font-size: 9px; letter-spacing: 2px; font-weight: 600;
+    color: #25d366; transition: color 0.3s;
+  }
+  .whatsapp-float:hover span { color: #fff; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg-deep);
+    border-top: 1px solid var(--border);
+  }
+  .footer-top {
+    max-width: 1080px; margin: 0 auto;
+    padding: 4rem 3rem;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  /* .footer-brand - styles defined via child selectors below */
+  .footer-logo-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 600;
+    color: var(--text-primary); letter-spacing: 2px; margin-bottom: 0.5rem;
+  }
+  .footer-logo-main .gilt { color: var(--gold); }
+  .footer-tagline {
+    font-size: 8.5px; letter-spacing: 3.5px;
+    color: var(--text-muted); margin-bottom: 1.25rem;
+  }
+  .footer-brand p { font-size: 11px; color: var(--text-muted); line-height: 2; max-width: 240px; }
+  .footer-col h4 {
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--gold); font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+  .footer-col a, .footer-col p {
+    display: block;
+    font-size: 11px; color: var(--text-muted);
+    text-decoration: none; margin-bottom: 0.65rem;
+    letter-spacing: 0.3px; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 100%;
+  }
+  .footer-bottom p { font-size: 10px; color: var(--text-faint); letter-spacing: 1px; }
+  .footer-bottom .gilt { color: var(--gold-dim); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── HERO LOAD ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .fade-up { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .fade-in { animation: fadeIn 1s ease forwards; opacity: 0; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.5s; }
+  .delay-4 { animation-delay: 0.7s; }
+  .delay-5 { animation-delay: 0.9s; }
+
+  /* ── COUNT UP ── */
+  .stat-val { transition: color 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 4.5rem 1.5rem 3.5rem; min-height: 0; }
+    .hero h1 { font-size: 40px; }
+    .hero-corners { inset: 1rem; }
+    .hero-stats { flex-wrap: wrap; gap: 0; }
+    .stat-item { padding: 1.5rem; min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+    .section { padding: 3rem 1.5rem; }
+    .dark-band { padding: 3.5rem 1.5rem; }
+    .fleet-sec { padding: 3.5rem 1.5rem; }
+    .cities-sec { padding: 3.5rem 1.5rem; }
+    .contact-sec { padding: 3.5rem 1.5rem; }
+    .contact-inner { gap: 2.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+    .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .whatsapp-float { bottom: 1.25rem; right: 1.25rem; }
+    .form-panel { padding: 2rem 1.5rem; }
+    .sec-title { font-size: 36px; }
+    .strip blockquote { font-size: 20px; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 32px; }
+    .stat-item { min-width: 50%; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TRAVEL BACKGROUND ANIMATIONS -->
+<div class="bg-scene" aria-hidden="true">
+  <div class="bg-sky"></div>
+  <div class="bg-stars"></div>
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+  <div class="cloud cloud-3"></div>
+  <div class="cloud cloud-4"></div>
+  <div class="airplane">
+    <svg viewBox="0 0 90 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 16 L58 2 L90 16 L58 30Z" fill="rgba(255,255,255,0.7)"/>
+      <path d="M18 16 L50 9 L60 16 L50 23Z" fill="rgba(201,168,76,0.5)"/>
+    </svg>
+  </div>
+  <div class="birds">
+    <svg viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M5 25 Q15 15 25 25" stroke="rgba(201,168,76,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M35 16 Q45 6 55 16" stroke="rgba(201,168,76,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M65 30 Q75 20 85 30" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M50 38 Q60 28 70 38" stroke="rgba(201,168,76,0.4)" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M90 14 Q100 4 110 14" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="mountains">
+    <svg viewBox="0 0 1440 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,280 200,70 400,280" fill="rgba(201,168,76,0.04)"/>
+      <polygon points="220,280 460,30 700,280" fill="rgba(201,168,76,0.03)"/>
+      <polygon points="530,280 750,90 970,280" fill="rgba(201,168,76,0.025)"/>
+      <polygon points="820,280 1060,50 1300,280" fill="rgba(201,168,76,0.035)"/>
+      <polygon points="1100,280 1290,80 1440,280" fill="rgba(201,168,76,0.03)"/>
+    </svg>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a class="whatsapp-float" href="https://wa.me/919342666040" target="_blank" rel="noopener noreferrer">
+  <i class="ti ti-brand-whatsapp" aria-hidden="true"></i>
+  <span>WhatsApp</span>
+</a>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="logo-wrap" href="#">
+    <div class="logo-emblem">
+      <!-- ✏️ Replace assets/images/logo.png with your actual logo file -->
+      <img src="assets/images/logo.jpg" alt="Logo" class="logo-img-custom" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+      <span style="display:none;align-items:center;justify-content:center;width:100%;height:100%;">
+        <i class="ti ti-crown" aria-hidden="true"></i>
+      </span>
+    </div>
+    <div class="logo-text">
+      <div class="logo-main"><span class="gilt">D</span>estination <span class="gilt">S</span>ervices</div>
+      <div class="logo-sub">Est. 2018 &nbsp;&middot;&nbsp; Premium Transportation &nbsp;&middot;&nbsp; South India</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#fleet">Fleet</a>
+    <a href="#coverage">Coverage</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Reserve Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-corners"></div>
+  <div class="ornament fade-up">
+    <div class="orn-line"></div>
+    <div class="orn-sm"></div>
+    <div class="orn-diamond"></div>
+    <div class="orn-sm"></div>
+    <div class="orn-line"></div>
+  </div>
+  <div class="hero-eyebrow fade-up delay-1">Premium Transportation &nbsp;&middot;&nbsp; South India</div>
+  <h1 class="fade-up delay-2">Where Every Journey<br>Becomes <em>First Class</em></h1>
+  <div class="hero-rule fade-up delay-2"></div>
+  <p class="fade-up delay-3">Discreet, punctual, and impeccably professional. Corporate transport, airport transfers, and bespoke tours — crafted for those who expect nothing less than excellence.</p>
+  <div class="hero-btns fade-up delay-4">
+    <button class="btn-gold" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Reserve a Ride</button>
+    <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+  </div>
+  <div class="hero-stats fade-up delay-5">
+    <div class="stat-item">
+      <span class="stat-val" data-target="6" data-suffix="+">0</span>
+      <span class="stat-lbl">Years of Excellence</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" data-target="500" data-suffix="+">0</span>
+      <span class="stat-lbl">Satisfied Clients</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val">24/7</span>
+      <span class="stat-lbl">Concierge Support</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-val" data-target="100" data-suffix="%">0</span>
+      <span class="stat-lbl">On-time Guarantee</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<div class="section-divider" id="services">
+  <div class="div-line"></div>
+  <div class="orn-diamond"></div>
+  <div class="div-text">Our Services</div>
+  <div class="orn-diamond"></div>
+  <div class="div-line"></div>
+</div>
+<div class="section">
+  <div class="reveal">
+    <div class="sec-eyebrow">What We Offer</div>
+    <div class="sec-title">Bespoke Transport<br>for Every Occasion</div>
+    <div class="sec-sub">From boardroom arrivals to scenic multi-city escapes — each ride is thoughtfully arranged for your comfort and peace of mind.</div>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card reveal reveal-delay-1">
+      <div class="svc-num">01</div>
+      <div class="svc-icon-row"><i class="ti ti-plane" aria-hidden="true"></i><div class="svc-rule"></div></div>
+      <div class="svc-name">Airport Transfers</div>
+      <div class="svc-desc">Seamless arrivals and departures from all major airports. Precise timing, meet-and-greet service, and personal attention — every time.</div>
+    </div>
+    <div class="svc-card reveal reveal-delay-2">
+      <div class="svc-num">02</div>
+      <div class="svc-icon-row"><i class="ti ti-building-skyscraper" aria-hidden="true"></i><div class="svc-rule"></div></div>
+      <div class="svc-name">Corporate Transport</div>
+      <div class="svc-desc">Executive-grade rides for business events, client visits, and board-level commutes — professional and discreet in every detail.</div>
+    </div>
+    <div class="svc-card reveal reveal-delay-3">
+      <div class="svc-num">03</div>
+      <div class="svc-icon-row"><i class="ti ti-map-2" aria-hidden="true"></i><div class="svc-rule"></div></div>
+      <div class="svc-name">Multi-city Tours</div>
+      <div class="svc-desc">Curated road journeys across South India's finest destinations, guided by experienced chauffeurs who know every route intimately.</div>
+    </div>
+    <div class="svc-card reveal reveal-delay-4">
+      <div class="svc-num">04</div>
+      <div class="svc-icon-row"><i class="ti ti-clock" aria-hidden="true"></i><div class="svc-rule"></div></div>
+      <div class="svc-name">Hourly Rentals</div>
+      <div class="svc-desc">Your private chauffeur, on your schedule. Book by the hour with complete flexibility and zero compromise on quality.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<div class="dark-band">
+  <div class="why-inner">
+    <div style="text-align:center;" class="reveal">
+      <div class="sec-eyebrow">Why Choose Us</div>
+      <div class="sec-title" style="text-align:center;">The Destination Difference</div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon-wrap"><i class="ti ti-clock-check" aria-hidden="true"></i></div>
+        <h3>Punctuality</h3>
+        <p>Time is your most valuable asset. We guard it with precision and pride on every single booking.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon-wrap"><i class="ti ti-shield" aria-hidden="true"></i></div>
+        <h3>Safety First</h3>
+        <p>Verified drivers, immaculate vehicles, and monitored journeys — your wellbeing is our responsibility.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon-wrap"><i class="ti ti-tie" aria-hidden="true"></i></div>
+        <h3>Professionalism</h3>
+        <p>Courteous, uniformed chauffeurs trained to deliver a quiet, dignified travel experience.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon-wrap"><i class="ti ti-tag" aria-hidden="true"></i></div>
+        <h3>Best Rates</h3>
+        <p>Luxury shouldn't come at an unjust price. We offer the most competitive rates in South India, guaranteed.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon-wrap"><i class="ti ti-headset" aria-hidden="true"></i></div>
+        <h3>Always on Call</h3>
+        <p>Our concierge team is available at any hour, any day — wherever your journey takes you.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon-wrap"><i class="ti ti-adjustments" aria-hidden="true"></i></div>
+        <h3>Flexible Packages</h3>
+        <p>Tailored arrangements for individuals, families, and corporations — your journey, your terms.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLEET -->
+<div class="fleet-sec" id="fleet">
+  <div class="fleet-inner">
+    <div class="section-divider" style="padding:0 0 2.5rem;">
+      <div class="div-line"></div>
+      <div class="orn-diamond"></div>
+      <div class="div-text">Our Fleet</div>
+      <div class="orn-diamond"></div>
+      <div class="div-line"></div>
+    </div>
+    <div class="reveal">
+      <div class="sec-eyebrow">Premium Vehicles</div>
+      <div class="sec-title">A Fleet Worthy<br>of Your Journey</div>
+      <div class="sec-sub">Every vehicle is air-conditioned, impeccably maintained, and prepared for your comfort before each ride.</div>
+    </div>
+    <div class="fleet-grid">
+      <div class="fleet-card reveal reveal-delay-1">
+        <div class="fleet-accent"></div>
+        <i class="ti ti-car fleet-icon" aria-hidden="true"></i>
+        <div class="fleet-name">Executive Sedan</div>
+        <div class="fleet-cap">Up to 4 passengers</div>
+        <div class="fleet-badge">Most Popular</div>
+      </div>
+      <div class="fleet-card reveal reveal-delay-2">
+        <div class="fleet-accent"></div>
+        <i class="ti ti-car-suv fleet-icon" aria-hidden="true"></i>
+        <div class="fleet-name">Premium SUV</div>
+        <div class="fleet-cap">Up to 7 passengers</div>
+        <div class="fleet-badge">Family Choice</div>
+      </div>
+      <div class="fleet-card reveal reveal-delay-3">
+        <div class="fleet-accent"></div>
+        <i class="ti ti-bus fleet-icon" aria-hidden="true"></i>
+        <div class="fleet-name">Tempo Traveller</div>
+        <div class="fleet-cap">Up to 12 passengers</div>
+        <div class="fleet-badge">Group Travel</div>
+      </div>
+      <div class="fleet-card reveal reveal-delay-4">
+        <div class="fleet-accent"></div>
+        <i class="ti ti-bus-stop fleet-icon" aria-hidden="true"></i>
+        <div class="fleet-name">Luxury Coach</div>
+        <div class="fleet-cap">15+ passengers</div>
+        <div class="fleet-badge">Corporate Events</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL STRIP -->
+<div class="strip">
+  <blockquote>
+    &ldquo;Destination Services redefined what we expect from corporate travel in South India.
+    <span>Reliable, refined, and remarkably professional</span> — they are our only choice.&rdquo;
+    <cite>— Corporate Client &nbsp;&middot;&nbsp; Coimbatore</cite>
+  </blockquote>
+</div>
+
+<!-- COVERAGE -->
+<div class="cities-sec" id="coverage">
+  <div class="cities-inner">
+    <div class="reveal">
+      <div class="sec-eyebrow">Coverage</div>
+      <div class="sec-title">Across South India</div>
+      <div class="sec-sub">We operate seamlessly across all major destinations — from cultural capitals to serene hill retreats and coastal escapes.</div>
+    </div>
+    <div class="city-grid">
+      <div class="city-pill reveal reveal-delay-1"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Coimbatore</span></div>
+      <div class="city-pill reveal reveal-delay-1"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Chennai</span></div>
+      <div class="city-pill reveal reveal-delay-2"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Bangalore</span></div>
+      <div class="city-pill reveal reveal-delay-2"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Madurai</span></div>
+      <div class="city-pill reveal reveal-delay-3"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Ooty</span></div>
+      <div class="city-pill reveal reveal-delay-3"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Kodaikanal</span></div>
+      <div class="city-pill reveal reveal-delay-4"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Trichy</span></div>
+      <div class="city-pill reveal reveal-delay-4"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Kochi</span></div>
+      <div class="city-pill reveal reveal-delay-1"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Hyderabad</span></div>
+      <div class="city-pill reveal reveal-delay-2"><i class="ti ti-map-pin" aria-hidden="true"></i><span>Mysore</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-sec" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="sec-eyebrow">Get in Touch</div>
+      <div class="contact-info-title">Let Us Plan<br>Your Journey</div>
+      <div class="contact-sub">Speak with our concierge team to arrange a seamless, tailored travel experience from start to finish. We are always available.</div>
+      <div class="contact-row">
+        <div class="ci-icon"><i class="ti ti-phone" aria-hidden="true"></i></div>
+        <div>
+          <div class="ci-label">Phone</div>
+          <div class="ci-val">+91 93426 66040</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="ci-icon"><i class="ti ti-mail" aria-hidden="true"></i></div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-val">destinationservicescbe@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="ci-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
+        <div>
+          <div class="ci-label">Base City</div>
+          <div class="ci-val">Coimbatore, Tamil Nadu</div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="ci-icon"><i class="ti ti-clock" aria-hidden="true"></i></div>
+        <div>
+          <div class="ci-label">Availability</div>
+          <div class="ci-val">24 Hours &nbsp;&middot;&nbsp; 7 Days</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel reveal reveal-delay-2">
+      <div class="form-title">Reserve Your Ride</div>
+      <div id="reserveForm">
+        <div class="form-row">
+          <div class="fr">
+            <label>Full Name</label>
+            <input type="text" id="f-name" placeholder="Your full name" />
+          </div>
+          <div class="fr">
+            <label>Phone Number</label>
+            <input type="tel" id="f-phone" placeholder="+91 98765 43210" />
+          </div>
+        </div>
+        <div class="fr">
+          <label>Email Address</label>
+          <input type="email" id="f-email" placeholder="your@email.com" />
+        </div>
+        <div class="fr">
+          <label>Service Required</label>
+          <select id="f-service">
+            <option value="">Select a service</option>
+            <option>Airport Transfer</option>
+            <option>Corporate Transport</option>
+            <option>Multi-city Tour</option>
+            <option>Hourly Rental</option>
+          </select>
+        </div>
+        <div class="fr">
+          <label>Travel Details</label>
+          <textarea id="f-details" placeholder="Share your travel requirements, dates, and destinations..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit()">Send Enquiry</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="tick"><i class="ti ti-check" aria-hidden="true"></i></div>
+        <h4>Enquiry Received</h4>
+        <p>Thank you for reaching out. Our concierge team will contact you within the hour to arrange your journey.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-main"><span class="gilt">D</span>estination <span class="gilt">S</span>ervices</div>
+      <div class="footer-tagline">Your Trusted Travel Partner</div>
+      <p>Six years of delivering safe, punctual, and premium transportation across South India for corporates, families, and discerning travellers.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Airport Transfers</a>
+      <a href="#services">Corporate Transport</a>
+      <a href="#services">Multi-city Tours</a>
+      <a href="#services">Hourly Rentals</a>
+    </div>
+    <div class="footer-col">
+      <h4>Coverage</h4>
+      <p>Coimbatore</p>
+      <p>Chennai</p>
+      <p>Bangalore</p>
+      <p>Madurai &amp; More</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>+91 93426 66040</p>
+      <p style="font-size:10px;">destinationservicescbe<br>@gmail.com</p>
+      <p>24/7 Concierge</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 <span class="gilt">Destination Services</span> &nbsp;&middot;&nbsp; All rights reserved</p>
+    <p>Coimbatore, Tamil Nadu &nbsp;&middot;&nbsp; South India</p>
+  </div>
+</footer>
+
+<script>
+  /* ── SCROLL REVEAL ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── COUNT UP ANIMATION ── */
+  function animateCountUp(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+      else el.textContent = target + suffix;
+    }
+    requestAnimationFrame(update);
+  }
+
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.target.dataset.target) {
+        animateCountUp(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-val[data-target]').forEach(el => statObserver.observe(el));
+
+  /* ── FORM SUBMIT ── */
+  function handleSubmit() {
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    if (!name || !phone) {
+      document.getElementById('f-name').style.borderColor = name ? '' : '#c9a84c';
+      document.getElementById('f-phone').style.borderColor = phone ? '' : '#c9a84c';
+      return;
+    }
+    // Build mailto for email client fallback
+    const service = document.getElementById('f-service').value;
+    const email = document.getElementById('f-email').value;
+    const details = document.getElementById('f-details').value;
+    const subject = encodeURIComponent('Ride Enquiry — ' + name);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Phone: ' + phone + '\n' +
+      'Email: ' + email + '\n' +
+      'Service: ' + (service || 'Not specified') + '\n' +
+      'Details: ' + (details || 'Not provided')
+    );
+    window.location.href = 'mailto:destinationservicescbe@gmail.com?subject=' + subject + '&body=' + body;
+
+    // Show success state
+    document.getElementById('reserveForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  /* ── STICKY NAV SHADOW ON SCROLL ── */
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.style.borderBottomColor = 'rgba(201,168,76,0.15)';
+    } else {
+      nav.style.borderBottomColor = '';
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
